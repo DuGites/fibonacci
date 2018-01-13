@@ -1,26 +1,29 @@
 # Fibonacci
 
-A Django Project with RESTful API to get the fibonacci numbers.
+A Django Project with a RESTful API to get the fibonacci series for a given number.
 
 This project provides a RESTful API for getting back the first n fibonacci
-numbers. It is located at ``/fibonacci/-\w+`` from the root url and returns a JSON
-serialized response
+numbers. It is located at ``/fibonacci/numeric_value`` from the root url and returns a JSON response
 
 The api can be invoked using the following url. The numeric parameter denotes the number
 of fibonacci values that you want. For e.g.
 
-    GET /fibonacci/5
+    curl  http://hostname:port/fibonacci/5
 
-will return to you the first 5 fibonacci numbers
+will return to you the first 5 fibonacci numbers. If you request the series for a negative number or any
+text besides a positive integer the API will respond with a bad request code.
 
 ## Installation
 
-Make sure you have pip on your local system. Create and activate a virtualenv 
+Make sure you have pip and virtualenv on your local system. Create and activate a virtualenv 
 using the following commands
 
     make install-requirements
 
-Run Migrations:
+Run Migrations: 
+  
+  We are not having any database models at the moment, but to avoid django warnings while developing
+  code run the following command.
 
     make run-migrations
 
@@ -39,11 +42,10 @@ development server.
     -- Make sure you have virtualenv installed on the instance.
     sudo pip install virtualenv
 
-    -- create a virtualenv to install the packages
+    -- create a virtualenv and install the dependencies using
     make install-requirements
 
-    export VIRTUAL_ENV='PATH_TO_VIRTUAL_ENV'
-    uwsgi --http :9090 --wsgi-file fibonacci/wsgi.py --virtualenv $VIRTUAL_ENV
+    make start-uwsgi
 
 
 This will allow uwsgi to accept all incoming requests on port 9090.
@@ -60,4 +62,12 @@ This will start the Django development server running at 127.0.0.1:8000
 ## Tests
 
 If you add more functionality please add unit tests and run make coverage-reports to check if 100% coverage is maintained
+
+    make coverage-reports
+
+## SAAS Deployment
+
+  Further work would include making a docker image from the django project and exposing it over port 80. 
+  We would need a Dockerfile and a docker-compose.yml to automate the deployment process. This is further work.
+
 
