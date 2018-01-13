@@ -1,0 +1,10 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+
+# Unit test / coverage reports
+.coverage
+.coverage.*
+
+# Virtualenv
+.venv3/
